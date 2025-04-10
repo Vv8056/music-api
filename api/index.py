@@ -39,7 +39,7 @@ def get_song_data_by_id(id):
 
 @app.route('/')
 def home():
-    return jsonify({"message": "JioSaavn API is running!"})
+    return jsonify({"message": "Air music API is running!"})
     
 @app.route('/songs', methods=['GET'])
 def search_song():

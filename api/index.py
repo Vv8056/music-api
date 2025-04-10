@@ -36,6 +36,11 @@ def get_song_data_by_id(id):
     if response.status_code == 200:
         return response.json()
     return None
+
+@app.route('/')
+def home():
+    return jsonify({"message": "JioSaavn API is running!"})
+    
 @app.route('/songs', methods=['GET'])
 def search_song():
     """Search for a song with filtered song data"""

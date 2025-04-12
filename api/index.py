@@ -60,8 +60,7 @@ def search_song():
                 "language": song.get("language"),
                 "url": song.get("url"),
                 "image": song.get("image", [{}])[-1].get("url"),  # get last/highest quality image
-                # "downloadUrl": song.get("downloadUrl", [])
-                "downloadUrl": song.get("downloadUrl", [{}])[-1].get("downloadUrl")
+                "downloadUrl": song.get("downloadUrl", [])
             })
         return jsonify(filtered_results)
     return jsonify({"error": "No data found!"}), 404
@@ -80,8 +79,7 @@ def get_song(id):
                     "language": song.get("language"),
                     "hasLyrics": song.get("hasLyrics"),
                     "image": song.get("image", []),
-                    # "downloadUrl": song.get("downloadUrl", []),
-                    "downloadUrl": song.get("downloadUrl", [{}])[-1].get("downloadUrl"),
+                    "downloadUrl": song.get("downloadUrl", []),
                     "releaseDate": song.get("releaseDate"),
                     "playCount": song.get("playCount")
                     # "artists": song.get("artists", {}).get("primary", [])

@@ -60,7 +60,21 @@ def search_song():
                 "language": song.get("language"),
                 "url": song.get("url"),
                 "image": song.get("image", [{}])[-1].get("url"),  # get last/highest quality image
-                "downloadUrl": song.get("downloadUrl", [])
+                # "downloadUrl": song.get("downloadUrl", [])
+                # Filter the highest quality
+                download_list = song.get("downloadUrl", [])
+
+                if download_list:
+                    # Sort by numeric kbps value descending
+                    sorted_list = sorted(
+                    download_list,
+                    key=lambda x: int(x.get("quality", "0kbps").replace("kbps", "")),
+                    reverse=True
+                    )
+                    highest_quality = sorted_list[0]
+                    song["downloadUrl"] = highest_quality
+                else:
+                    song["downloadUrl"] = {}
             })
         return jsonify(filtered_results)
     return jsonify({"error": "No data found!"}), 404

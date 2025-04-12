@@ -60,7 +60,8 @@ def search_song():
                 "language": song.get("language"),
                 "url": song.get("url"),
                 "image": song.get("image", [{}])[-1].get("url"),  # get last/highest quality image
-                "downloadUrl": song.get("downloadUrl", [])
+                # "downloadUrl": song.get("downloadUrl", [])
+                "musicUrl": song.get("downloadUrl", [{}])[-1].get("url")
             })
         return jsonify(filtered_results)
     return jsonify({"error": "No data found!"}), 404

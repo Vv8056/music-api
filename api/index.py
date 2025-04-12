@@ -53,11 +53,11 @@ def search_song():
     if data and "data" in data and "results" in data["data"]:
         filtered_results = []
 
-        for song in data["data"]["results"]:
-            # Safely get the last download URL entry
-            raw_url = song.get("downloadUrl", [{}])[-1].get("url", "")
-            # Replace http with https
-            secure_url = raw_url.replace("http://", "https://")
+        # for song in data["data"]["results"]:
+        #     # Safely get the last download URL entry
+        #     raw_url = song.get("downloadUrl", [{}])[-1].get("url", "")
+        #     # Replace http with https
+        #     secure_url = raw_url.replace("http://", "https://")
             
         for song in data["data"]["results"]:
             filtered_results.append({
@@ -67,8 +67,8 @@ def search_song():
                 "url": song.get("url"),
                 "image": song.get("image", [{}])[-1].get("url"),  # get last/highest quality image
                 # "downloadUrl": song.get("downloadUrl", [])
-                # "musicUrl": song.get("downloadUrl", [{}])[-1].get("url")
-                "musicUrl": secure_url
+                "musicUrl": song.get("downloadUrl", [{}])[-1].get("url")
+                # "musicUrl": secure_url
             })
         return jsonify(filtered_results)
     return jsonify({"error": "No data found!"}), 404
